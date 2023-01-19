@@ -133,7 +133,6 @@
     } else {
       activeTasks = tasks.filter((task) => task.complete == true);
     }
-    console.log(activeTasks);
   }
 
   function setCompletion(task) {
@@ -142,8 +141,7 @@
   }
 
   function deleteTask(task) {
-    let index = tasks.indexOf(task);
-    console.log(index);
+    let index = tasks.indexOf(task); 
     tasks.splice(index, 1);
     task.selected = "unselected";
     updateTasks();

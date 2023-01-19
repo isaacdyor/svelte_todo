@@ -1,13 +1,30 @@
 <script>
-    import { isActive, url } from '@roxi/routify'
+    import { isActive, url, goto } from '@roxi/routify'
+    import { activeUser } from '../state.ts';
   
     // Define the links for the navbar
-    const links = [
+
+    const loggedOutLinks = [
       ['./index', 'Home'],
-      ['./blog', 'Blog'],
-      ['./about', 'About'],
-      ['./contact', 'Contact']
+      ['./investments', 'Investments'],
+      ['./login', 'Login']
     ]
+  
+    const loggedInLinks = [
+      ['./index', 'Home'],
+      ['./investments', 'Investments'],
+      ['./create_investment', 'Create'],
+      ['./profile', 'Profile'],
+    ]
+    
+    function logout(event) {
+      if (confirm("Are you sure you want to logout?")) {
+        $activeUser = {};
+      } else {
+        event.preventDefault();
+      }
+    }
+
   </script>
   
   <style>
@@ -53,6 +70,7 @@
     .active {
       font-weight: bold;
     }
+
   </style>
   
     
@@ -60,15 +78,23 @@
   <!-- Add the navbar HTML -->
   <header>
       <nav>
-          <!-- Add the "Tamo Movers" logo and link it to the homepage -->
-          <div class="logo" on:click={() => window.location.href = '/'}>Tamo Movers</div>
+          <div class="logo" on:click={$goto('/')}>Spark Royalty</div>
           <!-- Add the nav links -->
           <div class="links">
-            {#each links as [path, name]}
-              <!-- Use the isActive function to apply the "active" class to the active link -->
-              <a class:active={$isActive(path)} href={$url(path)}>{name}</a>
-            {/each}
+            {#if Object.keys($activeUser).length === 0}
+              {#each loggedOutLinks as [path, name]}
+                <a class:active={$isActive(path)} href={$url(path)}>{name}</a>
+              {/each}
+            {:else}
+              {#each loggedInLinks as [path, name]}
+                <a class:active={$isActive(path)} href={$url(path)}>{name}</a>
+              {/each}
+              <a href={$url('./login')} on:click={logout}>Logout</a>
+            {/if}
           </div>
+
+            
+
         </nav>
   </header>
   
