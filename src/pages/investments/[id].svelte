@@ -19,6 +19,7 @@
     <h5>Title: {investment.title}</h5>
     <p>Description: {investment.description}</p>
     <p>Requested dollar amount: {investment.amount}</p>
+    <p>Payout Percentage: {investment.payout}</p>
     <p>Creator: {investment.creator.username}</p>
     {#if $activeUser.username == investment.creator.username}
         <button class="investment-detail-edit-btn" on:click={$goto(`/investments/edit/${investment.id}`)}>Edit</button>

@@ -14,6 +14,7 @@
                     <h5 class="investment-title">Title: {investment.title}</h5>
                     <p class="investment-description">Description: {investment.description}</p>
                     <p class="investment-amount">Requested dollar amount: {investment.amount}</p>
+                    <p class="investment-amount">Payout percentage: {investment.payout}</p>
                     <p class="investment-creator">Creator: {investment.creator.username}</p>
                 </div>
             </div>

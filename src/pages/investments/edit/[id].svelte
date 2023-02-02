@@ -7,21 +7,32 @@
     let title = $investments[index].title;
     let description = $investments[index].description;
     let amount = $investments[index].amount;
+    let payout = $investments[index].payout;
     let empty = false;
+    let invalidPayout = false;
 
 	function edit() {
-        if (title == null || description == null || amount == null) {
+        if (title == null || description == null || amount == null || payout == null) {
             empty = true;
 
             title = null;
             description = null;
             amount = null;
+            payout = null;
+        } else if (payout < 100) {
+            invalidPayout = true;
+
+            title = null;
+            description = null;
+            amount = null;
+            payout = null;
         }
         else {
             $investments[index] = {
                 title: title,
                 description: description,
                 amount: amount,
+                payout: payout,
                 creator: $activeUser,
                 id: $investments[index].id,
             };
@@ -43,6 +54,8 @@
         <textarea class="input" bind:value={description} placeholder="Description" cols="50" rows="10"></textarea>
         <h4>Amount of money you are looking for</h4>
         <input class="input" bind:value={amount} placeholder="Dollar amount" type="number" min="0">
+        <h4>Percentage of investment you will pay back (Must be greater than 100)</h4>
+        <input class="input" bind:value={payout} placeholder="Percentage" type="number" min="100">
         <button class="button" on:click={edit}>Edit</button>
         {#if empty}
             <p>Do not leave any of these fields blank.</p>

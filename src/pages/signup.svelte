@@ -18,10 +18,13 @@
             $profiles = [...$profiles, {
                 username: username,
                 password: password,
+                balance: 0,
+
             }];
             $activeUser = {
                 username: username,
                 password: password,
+                balance: 0,
             }
             $goto('./profile')
         } 
